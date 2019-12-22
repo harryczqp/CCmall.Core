@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using CCmall.Common;
+using CCmall.Common.Configurations;
 using CCmall.Core.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,8 +60,8 @@ namespace CCmall.Core
 
             app.UseSwaggerUI(options=>
             {
-                var ApiName = Appsettings.app(new[] { "Startup", "ApiName" });
-                var Version = Appsettings.app("Startup", "ApiVersion");
+                var ApiName = Appsettings.Startup.ApiName;
+                var Version = Appsettings.Startup.ApiVersion;
                 options.SwaggerEndpoint($"/swagger/{Version}/swagger.json", $"{Version}");
                 options.RoutePrefix = "";
             });

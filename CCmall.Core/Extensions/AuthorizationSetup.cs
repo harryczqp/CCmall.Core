@@ -1,4 +1,5 @@
 ﻿using CCmall.Common;
+using CCmall.Common.Configurations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -20,11 +21,11 @@ namespace CCmall.Core.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             //读取配置文件
-            var symmetricKeyAsBase64 = Appsettings.app(new string[] { "Audience", "Secret" });
+            var symmetricKeyAsBase64 = Appsettings.Jwt.Secret;
             var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
             var signingKey = new SymmetricSecurityKey(keyByteArray);
-            var Issuer = Appsettings.app(new string[] { "Audience", "Issuer" });
-            var Audience = Appsettings.app(new string[] { "Audience", "Audience" });
+            var Issuer = Appsettings.Jwt.Issuer;
+            var Audience = Appsettings.Jwt.Audience;
             services.AddAuthentication(o =>
             {
                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;

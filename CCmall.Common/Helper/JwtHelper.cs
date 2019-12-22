@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Linq;
 using Microsoft.IdentityModel.Tokens;
+using CCmall.Common.Configurations;
 
 namespace CCmall.Common.Helper
 {
@@ -18,14 +19,13 @@ namespace CCmall.Common.Helper
         public static string IssueJwt(JwtTokenModel token)
         {
             //init
-            var issure = Appsettings.app(new string[] { "Audience", "Issure" });
-            var audince = Appsettings.app(new string[] { "Audience", "Audience" });
-            var secret = Appsettings.app(new string[] { "Audience", "Secret" });
+            var issure = Appsettings.Jwt.Issuer;
+            var audince = Appsettings.Jwt.Audience;
+            var secret = Appsettings.Jwt.Secret;
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, token.Uid.ToStr()),
                 new Claim(JwtRegisteredClaimNames.Iss, issure),
-                new Claim(JwtRegisteredClaimNames.Aud, audince),
                 new Claim(JwtRegisteredClaimNames.Iat, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
                 new Claim(JwtRegisteredClaimNames.Nbf, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
                 new Claim(JwtRegisteredClaimNames.Exp, $"{new DateTimeOffset(DateTime.Now.AddSeconds(1000)).ToUnixTimeSeconds()}"),//过期时间

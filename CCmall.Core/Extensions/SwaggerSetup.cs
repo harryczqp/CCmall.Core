@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using NLog;
+using CCmall.Common.Configurations;
 
 namespace CCmall.Core.Extensions
 {
@@ -19,8 +20,8 @@ namespace CCmall.Core.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             var basePath = AppContext.BaseDirectory;
-            var ApiName = Appsettings.app(new[] { "Startup", "ApiName" });
-            var Version = Appsettings.app("Startup", "ApiVersion");
+            var ApiName = Appsettings.Startup.ApiName;
+            var Version = Appsettings.Startup.ApiVersion;
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(Version, new OpenApiInfo

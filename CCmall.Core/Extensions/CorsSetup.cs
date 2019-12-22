@@ -1,4 +1,5 @@
 ﻿using CCmall.Common;
+using CCmall.Common.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -18,7 +19,7 @@ namespace Blog.Core.Extensions
                 c.AddPolicy("LimitRequests", policy =>
                 {
                     policy
-                    .WithOrigins(Appsettings.app(new string[] { "Startup", "Cors", "IPs" }).Split(','))
+                    .WithOrigins(Appsettings.Startup.Cors.IPs.Split(','))
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
