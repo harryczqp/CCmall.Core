@@ -6,7 +6,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin</OutputPath>
-    <DocumentationFile>..\bin\CCmall.Model.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CCmall.IRepository\CCmall.IRepository.csproj" />
+    <ProjectReference Include="..\CCmall.IServices\CCmall.IServices.csproj" />
+  </ItemGroup>
 
 </Project>

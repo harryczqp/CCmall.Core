@@ -6,7 +6,6 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin</OutputPath>
-    <DocumentationFile>..\bin\CCmall.Model.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
