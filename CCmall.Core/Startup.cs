@@ -6,6 +6,7 @@ using Autofac;
 using CCmall.Common;
 using CCmall.Common.Configurations;
 using CCmall.Core.Extensions;
+using CCmall.Core.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,8 @@ namespace CCmall.Core
             services.AddAuthorizationSetup();
             services.AddControllers(o =>
             {
+                o.Filters.Add<ResultFilter>();
+                o.Filters.Add<ExceptionFilter>(); 
                 //TODO 全局异常过滤
             })
             .AddNewtonsoftJson(options =>
