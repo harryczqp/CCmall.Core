@@ -32,6 +32,7 @@ namespace CCmall.Core
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             services.AddSwaggerSetup();
             services.AddAuthorizationSetup();
+            services.AddSqlsugarSetup();
             services.AddControllers(o =>
             {
                 o.Filters.Add<ResultFilter>();

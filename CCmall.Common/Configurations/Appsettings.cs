@@ -40,5 +40,16 @@ namespace CCmall.Common.Configurations
                 return result;
             }
         }
+        public static List<BaseDB> BaseDB
+        {
+            get
+            {
+                var result = new List<BaseDB>();
+                var section = Configuration.GetSection("BaseDB");
+                if (section != null)
+                    result = section.Get<List<BaseDB>>();
+                return result;
+            }
+        }
     }
 }
