@@ -1,5 +1,5 @@
-﻿using System;
-using CCmall.IServices;
+﻿using CCmall.Services.Interface;
+using System;
 
 namespace CCmall.Services
 {

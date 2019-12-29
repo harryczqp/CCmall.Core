@@ -8,9 +8,4 @@
     <OutputPath>..\bin</OutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CCmall.IRepository\CCmall.IRepository.csproj" />
-    <ProjectReference Include="..\CCmall.IServices\CCmall.IServices.csproj" />
-  </ItemGroup>
-
 </Project>
