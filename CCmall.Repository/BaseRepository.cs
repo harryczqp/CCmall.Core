@@ -1,5 +1,4 @@
-﻿using CCmall.Common.Configurations;
-using CCmall.Model;
+﻿using CCmall.Model;
 using CCmall.Repository.Interface;
 using SqlSugar;
 using System;
