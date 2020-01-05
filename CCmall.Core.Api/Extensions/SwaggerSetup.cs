@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using CCmall.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using NLog;
 using CCmall.Common.Configurations;
 
-namespace CCmall.Core.Extensions
+namespace CCmall.Core.Api.Extensions
 {
     /// <summary>
     /// Swagger 启动服务

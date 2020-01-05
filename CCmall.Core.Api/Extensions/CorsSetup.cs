@@ -3,7 +3,7 @@ using CCmall.Common.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Blog.Core.Extensions
+namespace CCmall.Core.Api.Extensions
 {
     /// <summary>
     /// Cors 启动服务

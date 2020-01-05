@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CCmall.Core.Message
+namespace CCmall.Core.Api.Message
 {
     public class MessageResult
     {
-        public int Code { get; set; }
-        public string Message { get; set; }
-        public object Data { get; set; }
+        public int code { get; set; }
+        public string message { get; set; }
+        public object data { get; set; }
         public MessageResult(int code, string msg, Object data)
         {
-            Code = code;
-            Message = msg;
-            Data = data;
+            this.code = code;
+            message = msg;
+            this.data = data;
         }
     }
     public class BadExceptionResult : Exception

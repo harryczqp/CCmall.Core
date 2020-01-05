@@ -3,10 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CCmall.Core.Extensions
+namespace CCmall.Core.Api.Extensions
 {
     public static class SqlsugarSetup
     {

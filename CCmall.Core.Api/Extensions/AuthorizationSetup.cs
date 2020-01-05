@@ -1,18 +1,12 @@
-﻿using CCmall.Common;
-using CCmall.Common.Configurations;
-using Microsoft.AspNetCore.Authentication;
+﻿using CCmall.Common.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCmall.Core.Extensions
+namespace CCmall.Core.Api.Extensions
 {
     public static class AuthorizationSetup
     {

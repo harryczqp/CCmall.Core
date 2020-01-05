@@ -1,0 +1,46 @@
+﻿[*.cs]
+
+# ASP0000: Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+dotnet_diagnostic.ASP0000.severity = none
+
+# MVC1000: Use of IHtmlHelper.{0} should be avoided.
+dotnet_diagnostic.MVC1000.severity = none
+
+# MVC1001: Filters cannot be applied to page handler methods.
+dotnet_diagnostic.MVC1001.severity = none
+
+# MVC1002: Route attributes cannot be applied to page handler methods.
+dotnet_diagnostic.MVC1002.severity = none
+
+# MVC1003: Route attributes cannot be applied to page models.
+dotnet_diagnostic.MVC1003.severity = none
+
+# MVC1004: Rename model bound parameter.
+dotnet_diagnostic.MVC1004.severity = none
+
+# MVC1006: Methods containing TagHelpers must be async and return Task.
+dotnet_diagnostic.MVC1006.severity = none
+
+# BL0001: Component parameter should have public setters.
+dotnet_diagnostic.BL0001.severity = none
+
+# BL0002: Component has multiple CaptureUnmatchedValues parameters
+dotnet_diagnostic.BL0002.severity = none
+
+# BL0003: Component parameter with CaptureUnmatchedValues has the wrong type
+dotnet_diagnostic.BL0003.severity = none
+
+# BL0004: Component parameter should be public.
+dotnet_diagnostic.BL0004.severity = none
+
+# BL0005: Component parameter should not be set outside of its component.
+dotnet_diagnostic.BL0005.severity = none
+
+# BL0006: Do not use RenderTree types
+dotnet_diagnostic.BL0006.severity = none
+
+# ASP0001: Authorization middleware is incorrectly configured.
+dotnet_diagnostic.ASP0001.severity = none
+
+# MVC1005: Cannot use UseMvc with Endpoint Routing.
+dotnet_diagnostic.MVC1005.severity = none

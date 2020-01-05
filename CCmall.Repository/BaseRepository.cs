@@ -15,7 +15,7 @@ namespace CCmall.Repository
 
         private ISqlSugarClient _db
         {
-            get;
+            get { return _dbBase; }
         }
         
         public BaseRepository(IUnitOfWork unitOfWork)

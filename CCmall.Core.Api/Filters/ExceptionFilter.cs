@@ -1,13 +1,9 @@
-﻿using CCmall.Core.Message;
+﻿using CCmall.Core.Api.Message;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
-namespace CCmall.Core.Filters
+namespace CCmall.Core.Api.Filters
 {
     public class ExceptionFilter : IExceptionFilter
     {

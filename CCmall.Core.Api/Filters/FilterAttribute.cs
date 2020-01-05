@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CCmall.Core.Filters
+namespace CCmall.Core.Api.Filters
 {
     [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method,Inherited =true)]
     public class NoResultFilter: ActionFilterAttribute

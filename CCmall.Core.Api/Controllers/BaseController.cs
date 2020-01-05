@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CCmall.CoreControllers
+namespace CCmall.Core.Api.Controllers
 {
     [Authorize]
     [Route("/[controller]/[action]")]
