@@ -1,15 +1,8 @@
-﻿using CCmall.Model;
-using CCmall.Model.Models;
+﻿using CCmall.Model.Entities;
 using CCmall.Repository.Interface;
-using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
 namespace CCmall.Repository
 {
-    public class BaseUserRepository : BaseRepository<base_user>, IBaseUserRepository
+    internal class BaseUserRepository : BaseRepository<BaseUser>, IBaseUserRepository
     {
         public BaseUserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

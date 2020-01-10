@@ -29,7 +29,7 @@ namespace CCmall.Core.Api.Controllers
         public async Task<IActionResult> Login([FromBody]RequestUser model)
         {
             var pwd = MD5Helper.MD5Encrypt32(model.password);
-            var query = await _baseUser.Query(f => f.username.Equals(model.username) && f.password.Equals(pwd) && f.Status == 1);
+            var query = await _baseUser.Query(f => f.username.Equals(model.username) && f.password.Equals(pwd) && f.status == 1);
             if (query.Count == 0)
             {
                 throw new BadExceptionResult("User is valid!");
