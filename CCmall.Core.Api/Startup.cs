@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Autofac;
+using Autofac.Extras.DynamicProxy;
 using CCmall.Common.Configurations;
 using CCmall.Core.Api.Extensions;
 using CCmall.Core.Api.Filters;
@@ -54,22 +56,24 @@ namespace CCmall.Core.Api
             var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath;
             try
             {
-                //注入Services
-                var servicesFilePath = Path.Combine(basePath, "CCmall.Services.dll");
-                var assemblyServices = Assembly.LoadFrom(servicesFilePath);
-                builder.RegisterAssemblyTypes(assemblyServices)
-                    .AsImplementedInterfaces()
-                    .InstancePerDependency();
+                var interpectors = new List<Type>();
+                if (Appsettings.AppConfig.CCmallLogAop.Enable)
+                {
+                    builder.RegisterType<CCmallLogAop>();
+                    interpectors.Add(typeof(CCmallLogAop));
+                }
                 //注入Respository
                 var respositoryFilePath = Path.Combine(basePath, "CCmall.Repository.dll");
                 var assemblyRespository = Assembly.LoadFrom(respositoryFilePath);
                 builder.RegisterAssemblyTypes(assemblyRespository)
                     .AsImplementedInterfaces()
-                    .InstancePerDependency();
+                    .InstancePerDependency()
+                    .EnableInterfaceInterceptors()
+                    .InterceptedBy(interpectors.ToArray());
             }
             catch (Exception ex)
             {
-                _logger.Error($"Services.dll、Respository.dll异常{ex.Message}");
+                _logger.Error($"Respository.dll异常{ex.Message}");
             }
 
         }

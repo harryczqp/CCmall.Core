@@ -51,5 +51,17 @@ namespace CCmall.Common.Configurations
                 return result;
             }
         }
+
+        public static AppConfig AppConfig
+        {
+            get
+            {
+                var result = new AppConfig();
+                var section = Configuration.GetSection("AppConfig");
+                if (section != null)
+                    result = section.Get<AppConfig>();
+                return result;
+            }
+        }
     }
 }

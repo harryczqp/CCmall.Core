@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Model", "CCmall.Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Repository", "CCmall.Repository\CCmall.Repository.csproj", "{F6CF725A-1300-4178-A4DB-F372371BCC3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Services", "CCmall.Services\CCmall.Services.csproj", "{49CE9586-798E-48CC-9FA9-25E5B6A56FA5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Core.Api", "CCmall.Core.Api\CCmall.Core.Api.csproj", "{A62F3D63-8A48-4318-9E85-A223D65DDE12}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Tests", "CCmall.Tests\CCmall.Tests.csproj", "{7815B0FB-C436-4427-A8CF-706780D5B7B5}"
@@ -33,10 +31,6 @@ Global
 		{F6CF725A-1300-4178-A4DB-F372371BCC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CF725A-1300-4178-A4DB-F372371BCC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6CF725A-1300-4178-A4DB-F372371BCC3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49CE9586-798E-48CC-9FA9-25E5B6A56FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49CE9586-798E-48CC-9FA9-25E5B6A56FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49CE9586-798E-48CC-9FA9-25E5B6A56FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49CE9586-798E-48CC-9FA9-25E5B6A56FA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A62F3D63-8A48-4318-9E85-A223D65DDE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A62F3D63-8A48-4318-9E85-A223D65DDE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62F3D63-8A48-4318-9E85-A223D65DDE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
