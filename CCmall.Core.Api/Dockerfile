@@ -6,10 +6,10 @@ EXPOSE 5123
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["CCmall.Core.Api/CCmall.Core.Api.csproj", "CCmall.Core.Api/"]
-COPY ["CCmall.Repository/CCmall.Repository.csproj", "CCmall.Repository/"]
-COPY ["CCmall.Model/CCmall.Model.csproj", "CCmall.Model/"]
-COPY ["CCmall.Common/CCmall.Common.csproj", "CCmall.Common/"]
+COPY ["/CCmall.Core.Api/CCmall.Core.Api.csproj", "CCmall.Core.Api/"]
+COPY ["/CCmall.Repository/CCmall.Repository.csproj", "CCmall.Repository/"]
+COPY ["/CCmall.Model/CCmall.Model.csproj", "CCmall.Model/"]
+COPY ["/CCmall.Common/CCmall.Common.csproj", "CCmall.Common/"]
 RUN dotnet restore "CCmall.Core.Api/CCmall.Core.Api.csproj"
 COPY . .
 WORKDIR "/src/CCmall.Core.Api"
