@@ -15,10 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      env:
-        aliyun_username: ${{ secrets.Aliyun_Username }}
-        aliyun_password: ${{ secrets.Aliyun_Password }}
       run: |
-        sudo docker login --username=${aliyun_username} registry.cn-hangzhou.aliyuncs.com --password=${{aliyun_password}}
+        sudo docker login --username=${{ secrets.Aliyun_Username }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.Aliyun_Password }}
         sudo docker build ./ --file Dockerfile --tag ccmall.core:$(date +%s) registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.core:$(date +%s)
         sudo docker push registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.core:$(date +%s)
