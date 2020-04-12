@@ -43,7 +43,8 @@ namespace CCmall.Core.Api
                             options.AllowSynchronousIO = true; //∆Ù”√Õ¨≤ΩIO
                         })
                         .UseStartup<Startup>()
-                        .UseUrls($"http://127.0.0.1:{(args.Length >= 1 ? int.Parse(args[1]) : 5123)}");
+                        //.UseUrls($"http://127.0.0.1:{(args.Length >= 1 ? int.Parse(args[1]) : 5123)}");
+                        .UseUrls("http://localhost:5123");
                 });
     }
 }
