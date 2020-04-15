@@ -7,6 +7,7 @@ using Autofac.Extras.DynamicProxy;
 using CCmall.Common.Configurations;
 using CCmall.Core.Api.Extensions;
 using CCmall.Core.Api.Filters;
+using CCmall.Core.Api.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +50,7 @@ namespace CCmall.Core.Api
                 //不使用驼峰样式的key
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
+            services.AddSignalR();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -118,7 +120,7 @@ namespace CCmall.Core.Api
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
