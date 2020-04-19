@@ -79,13 +79,13 @@ namespace CCmall.Core.Api.Hubs
 
         //定于一个通讯管道，用来管理我们和客户端的连接
         //1、客户端调用 GetLatestCount，就像订阅
-        public async Task GetLatestCount(string random)
-        {
-            //2、服务端主动向客户端发送数据，名字千万不能错
-            //await Clients.All.ReceiveUpdate(LogLock.GetLogData());
+        //public async Task GetLatestCount(string random)
+        //{
+        //    //2、服务端主动向客户端发送数据，名字千万不能错
+        //    //await Clients.All.ReceiveUpdate(LogLock.GetLogData());
 
-            //3、客户端再通过 ReceiveUpdate ，来接收
+        //    //3、客户端再通过 ReceiveUpdate ，来接收
 
-        }
+        //}
     }
 }

@@ -20,7 +20,7 @@ namespace CCmall.Core.Api.Extensions
                 {
                     policy
                     .WithOrigins(Appsettings.Startup.Cors.IPs.Split(','))
-                    .SetIsOriginAllowed(origin => true)
+                    .AllowCredentials()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
