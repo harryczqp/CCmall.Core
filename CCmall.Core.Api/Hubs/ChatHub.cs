@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CCmall.Core.Api.Hubs
 {
-    public class ChatHub : Hub<IChatClient>
+    public class ChatHub : Hub
     {
         /// <summary>
         /// 向指定群组发送信息
@@ -16,7 +17,7 @@ namespace CCmall.Core.Api.Hubs
         /// <returns></returns>
         public async Task SendMessageToGroupAsync(string groupName, string message)
         {
-            await Clients.Group(groupName).ReceiveMessage(message);
+            await Clients.Group(groupName).SendAsync(message);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace CCmall.Core.Api.Hubs
         /// <returns></returns>
         public async Task SendPrivateMessage(string user, string message)
         {
-            await Clients.User(user).ReceiveMessage(message);
+            await Clients.User(user).SendAsync(message);
         }
 
         /// <summary>
@@ -72,9 +73,10 @@ namespace CCmall.Core.Api.Hubs
         }
 
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string message)
         {
-            await Clients.All.ReceiveMessage(user, message);
+            var ret=JsonConvert.SerializeObject(new { cost = 1, channel = 2 });
+            await Clients.All.SendAsync("success",message);
         }
 
         //定于一个通讯管道，用来管理我们和客户端的连接

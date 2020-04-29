@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-container">
+    <el-button @click="sendmsg">send</el-button>
     <component :is="currentRole" />
   </div>
 </template>
@@ -8,11 +9,11 @@
 import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
-import * as signalR from "@microsoft/signalr";
+import * as signalR from '@microsoft/signalr'
 
-let hubUrl = "http://localhost:5123/chatHub";
-const connection = new signalR.HubConnectionBuilder().withAutomaticReconnect().withUrl(hubUrl).build();
-connection.start().catch(err => alert(err.message));
+const hubUrl = 'http://localhost:5123/chatHub'
+const connection = new signalR.HubConnectionBuilder().withAutomaticReconnect().withUrl(hubUrl).build()
+connection.start().catch(err => alert(err.message))
 
 export default {
   name: 'Dashboard',
@@ -30,6 +31,11 @@ export default {
   created() {
     if (this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
+    }
+  },
+  methods: {
+    sendmsg() {
+      connection.invoke('SendPrivateMessage')
     }
   }
 }
