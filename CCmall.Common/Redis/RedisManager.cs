@@ -11,10 +11,12 @@ namespace CCmall.Common.Redis
     public class RedisManager : IRedisManager
     {
         private readonly RedisConfig _redisConnectionModel;
-        private readonly Logger<RedisManager> _logger;
         private volatile ConnectionMultiplexer _redisConnection;
+        private readonly object redisConnectionLock = new object();
+        public int DefaultDatabase { get; set; } = 0;
 
-        public RedisManager(Logger<RedisManager> logger)
+
+        public RedisManager()
         {
             var redisConfig = Appsettings.RedisConfig;
             if (string.IsNullOrEmpty(redisConfig.Connection) || redisConfig.ConnectTimeout == 0 || redisConfig.SyncTimeout == 0)
@@ -22,17 +24,16 @@ namespace CCmall.Common.Redis
                 throw new ArgumentException("RedisConfig error", nameof(redisConfig));
             }
             _redisConnectionModel = redisConfig;
-            _logger = logger;
             _redisConnection = GetRedisConnection();
         }
 
         private ConnectionMultiplexer GetRedisConnection()
         {
-            if (_redisConnection != null && _redisConnection.IsConnected)
+            if (_redisConnection != null && _redisConnection.IsConnected && _redisConnection.GetDatabase().Database == DefaultDatabase)
             {
                 return _redisConnection;
             }
-            lock (_redisConnection)
+            lock (redisConnectionLock)
             {
                 if (_redisConnection != null)
                 {
@@ -47,16 +48,25 @@ namespace CCmall.Common.Redis
                         ConnectTimeout = _redisConnectionModel.ConnectTimeout,
                         SyncTimeout = _redisConnectionModel.SyncTimeout,
                         Password = _redisConnectionModel.Password,
-                        EndPoints = { _redisConnectionModel.Connection }
+                        EndPoints = { _redisConnectionModel.Connection },
+                        DefaultDatabase = DefaultDatabase//可配
                     };
                     _redisConnection = ConnectionMultiplexer.Connect(config);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
+                    throw ex;
                 }
             }
             return _redisConnection;
+        }
+
+        public void SetDefaultDatabase(int db)
+        {
+            if (db >= 0 && db <= 14)
+            {
+                DefaultDatabase = db;
+            }
         }
 
         /// <summary>
@@ -149,5 +159,19 @@ namespace CCmall.Common.Redis
             return _redisConnection.GetDatabase().StringSet(key, value, TimeSpan.FromSeconds(120));
         }
 
+        /// <summary>
+        /// 增加/修改
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool SetHash(string key, string field, byte[] value, bool isReconnected = false)
+        {
+            if (isReconnected)
+            {
+                _redisConnection = GetRedisConnection();
+            }
+            return _redisConnection.GetDatabase().HashSet(key, field, value);
+        }
     }
 }

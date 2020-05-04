@@ -25,19 +25,18 @@ export default {
   },
   mounted() {
     this.signalr.start().catch(err => alert(err.message))
+    this.signalr.on('ReceiveMessage', (user, message) => {
+      console.log(message)
+    })
   },
   created() {
     if (this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
     }
-    // this.signalr.on("SendMessage").then(res => console.log(res));
   },
   methods: {
     sendmsg() {
       this.signalr.invoke('SendMessage', '123465', '54321')
-      this.signalr.on('SendMessage', (user, message) => {
-        console.log(message)
-      })
     }
   }
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using CCmall.Model.Request;
 using CCmall.Common.Helper;
 using CCmall.Core.Api.Message;
+using CCmall.Common.Redis;
+using CCmall.Core.Common.Hubs;
 
 namespace CCmall.Core.Api.Controllers
 {
@@ -14,9 +16,12 @@ namespace CCmall.Core.Api.Controllers
     public class LoginController : BaseController
     {
         private readonly IBaseUserRepository _baseUser;
-        public LoginController(IBaseUserRepository baseUser)
+        private readonly IRedisManager _redisManager;
+
+        public LoginController(IBaseUserRepository baseUser,IRedisManager redisManager)
         {
             _baseUser = baseUser;
+            _redisManager = redisManager;
         }
         [AllowAnonymous]
         [HttpPost]
@@ -34,6 +39,10 @@ namespace CCmall.Core.Api.Controllers
             {
                 throw new BadExceptionResult("User is valid!");
             }
+            var bytes= SerializeHelper.SerializeToBytes(query);
+            //TODO根据项目获取数据库
+            _redisManager.SetDefaultDatabase(12);
+            _redisManager.SetHash(RedisConstant.UserData,query.First().id.ToStr(), bytes);
             var token = "bearer ";
             token += JwtHelper.IssueJwt(new JwtTokenModel { Role = "admin,test", Uid = 1 });
             return new ObjectResult(new { token });

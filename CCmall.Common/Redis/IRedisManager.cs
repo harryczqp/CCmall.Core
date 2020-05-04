@@ -12,6 +12,8 @@ namespace CCmall.Common.Redis
         string GetValue(string key);
         void Remove(string key);
         void Set(string key, object value, TimeSpan cacheTime);
+        void SetDefaultDatabase(int db);
+        bool SetHash(string key, string field, byte[] value, bool isReconnected = false);
         bool SetValue(string key, byte[] value);
     }
 }
