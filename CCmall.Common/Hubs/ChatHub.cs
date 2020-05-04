@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CCmall.Core.Api.Hubs
+namespace CCmall.Core.Common.Hubs
 {
-    public class ChatHub : Hub
+
+    public class ChatHub : Hub<IChatHub>
     {
         /// <summary>
         /// 向指定群组发送信息
@@ -17,7 +18,7 @@ namespace CCmall.Core.Api.Hubs
         /// <returns></returns>
         public async Task SendMessageToGroupAsync(string groupName, string message)
         {
-            await Clients.Group(groupName).SendAsync(message);
+            await Clients.Group(groupName).ReceiveMessage(message);
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace CCmall.Core.Api.Hubs
         /// <returns></returns>
         public async Task SendPrivateMessage(string user, string message)
         {
-            await Clients.User(user).SendAsync(message);
+            await Clients.User(user).ReceiveMessage(message);
         }
 
         /// <summary>
@@ -73,18 +74,17 @@ namespace CCmall.Core.Api.Hubs
         }
 
 
-        public async Task SendMessage(string message)
+        public async Task SendMessage(string user, string message)
         {
-            var ret=JsonConvert.SerializeObject(new { cost = 1, channel = 2 });
-            await Clients.All.SendAsync("success",message);
+            await Clients.All.ReceiveMessage(user, message);
         }
 
-        //定于一个通讯管道，用来管理我们和客户端的连接
-        //1、客户端调用 GetLatestCount，就像订阅
+        ////定于一个通讯管道，用来管理我们和客户端的连接
+        ////1、客户端调用 GetLatestCount，就像订阅
         //public async Task GetLatestCount(string random)
         //{
         //    //2、服务端主动向客户端发送数据，名字千万不能错
-        //    //await Clients.All.ReceiveUpdate(LogLock.GetLogData());
+        //    await Clients.All.ReceiveUpdate(LogLock.GetLogData());
 
         //    //3、客户端再通过 ReceiveUpdate ，来接收
 

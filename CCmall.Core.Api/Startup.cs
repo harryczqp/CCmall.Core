@@ -7,7 +7,7 @@ using Autofac.Extras.DynamicProxy;
 using CCmall.Common.Configurations;
 using CCmall.Core.Api.Extensions;
 using CCmall.Core.Api.Filters;
-using CCmall.Core.Api.Hubs;
+using CCmall.Core.Common.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog;
+using CCmall.Common.Redis;
 
 namespace CCmall.Core.Api
 {
@@ -33,6 +34,7 @@ namespace CCmall.Core.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
+            services.AddSingleton<IRedisManager, RedisManager>();
             services.AddSwaggerSetup();
             services.AddAuthorizationSetup();
             services.AddSqlsugarSetup();

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CCmall.Core.Api.Hubs
+namespace CCmall.Core.Common.Hubs
 {
-    public interface IChatClient
+    public interface IChatHub
     {
         /// <summary>
         /// SignalR接收信息

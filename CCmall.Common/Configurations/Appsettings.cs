@@ -51,7 +51,17 @@ namespace CCmall.Common.Configurations
                 return result;
             }
         }
-
+        public static RedisConfig RedisConfig
+        {
+            get
+            {
+                var result = new RedisConfig();
+                var section = Configuration.GetSection("RedisConfig");
+                if (section != null)
+                    result = section.Get<RedisConfig>();
+                return result;
+            }
+        }
         public static AppConfig AppConfig
         {
             get
