@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <el-button @click="sendmsg">send</el-button>
+    <el-button @click="sendmsg">
+      <span>message</span>
+    </el-button>
     <component :is="currentRole" />
   </div>
 </template>
@@ -9,11 +11,6 @@
 import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
-import * as signalR from '@microsoft/signalr'
-
-const hubUrl = 'http://localhost:5123/chatHub'
-const connection = new signalR.HubConnectionBuilder().withAutomaticReconnect().withUrl(hubUrl).build()
-connection.start().catch(err => alert(err.message))
 
 export default {
   name: 'Dashboard',
@@ -24,18 +21,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'roles'
-    ])
+    ...mapGetters(['roles'])
+  },
+  mounted() {
+    this.signalr.start().catch(err => alert(err.message))
   },
   created() {
     if (this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
     }
+    // this.signalr.on("SendMessage").then(res => console.log(res));
   },
   methods: {
     sendmsg() {
-      connection.invoke('SendPrivateMessage')
+      this.signalr.invoke('SendMessage', '123465', '54321')
+      this.signalr.on('SendMessage', (user, message) => {
+        console.log(message)
+      })
     }
   }
 }

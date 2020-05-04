@@ -20,6 +20,8 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
+import signalr from './utils/signalr'
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -44,6 +46,8 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+
+Vue.use(signalr)
 
 new Vue({
   el: '#app',
