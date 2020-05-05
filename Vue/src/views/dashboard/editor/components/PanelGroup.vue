@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
@@ -9,12 +9,12 @@
           <div class="card-panel-text">
             New Visits
           </div>
-          <count-to :start-val="0" :end-val="data1" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="obj.visitors" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-message">
           <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
@@ -22,12 +22,12 @@
           <div class="card-panel-text">
             Messages
           </div>
-          <count-to :start-val="0" :end-val="data2" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="obj.messages" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-money">
           <svg-icon icon-class="money" class-name="card-panel-icon" />
         </div>
@@ -35,12 +35,12 @@
           <div class="card-panel-text">
             Purchases
           </div>
-          <count-to :start-val="0" :end-val="data3" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="obj.purchases" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-shopping">
           <svg-icon icon-class="shopping" class-name="card-panel-icon" />
         </div>
@@ -48,7 +48,7 @@
           <div class="card-panel-text">
             Shoppings
           </div>
-          <count-to :start-val="0" :end-val="data4" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="obj.shoppings" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -57,34 +57,18 @@
 
 <script>
 import CountTo from 'vue-count-to'
-import { getCount } from '@/api/dashboard'
+// import { getCount } from '@/api/dashboard'
 
 export default {
   components: {
     CountTo
   },
-  data() {
-    return {
-      data1: 0,
-      data2: 0,
-      data3: 0,
-      data4: 0
-    }
-  },
-  created() {
-    this.handleGetDashData()
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    },
-    handleGetDashData() {
-      getCount().then(res => {
-        this.data1 = res.data.data1
-        this.data2 = res.data.data2
-        this.data3 = res.data.data3
-        this.data4 = res.data.data4
-      })
+  props: {
+    obj: {
+      visitors: 0,
+      messages: 0,
+      purchases: 0,
+      shoppings: 0
     }
   }
 }

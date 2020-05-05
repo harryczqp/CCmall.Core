@@ -1,8 +1,5 @@
 <template>
   <div class="dashboard-container">
-    <el-button @click="sendmsg">
-      <span>message</span>
-    </el-button>
     <component :is="currentRole" />
   </div>
 </template>
@@ -23,20 +20,9 @@ export default {
   computed: {
     ...mapGetters(['roles'])
   },
-  mounted() {
-    this.signalr.start().catch(err => alert(err.message))
-    this.signalr.on('ReceiveMessage', (user, message) => {
-      console.log(message)
-    })
-  },
   created() {
     if (this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
-    }
-  },
-  methods: {
-    sendmsg() {
-      this.signalr.invoke('SendMessage', '123465', '54321')
     }
   }
 }
