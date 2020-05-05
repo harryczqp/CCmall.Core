@@ -23,5 +23,6 @@ namespace CCmall.Core.Common.Hubs
         Task ReceiveMessage(string user, string message);
 
         Task ReceiveUpdate(object message);
+        Task GetDashData(object message);
     }
 }
