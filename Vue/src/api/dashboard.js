@@ -28,3 +28,11 @@ export function getFather() {
     method: 'get'
   })
 }
+
+export function setDashData(data) {
+  return request({
+    url: '/dashboard/setDashData',
+    method: 'post',
+    data
+  })
+}
