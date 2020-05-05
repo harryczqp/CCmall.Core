@@ -49,7 +49,7 @@ namespace CCmall.Core.Api.Controllers
                 }
             }
             _redisManager.Set(RedisConstant.DashData, model, TimeSpan.FromDays(1));
-            _hubContext.Clients.All.SendAsync("GetDashData", model);
+            _hubContext.Clients.All.SendAsync("GetDashData", SerializeHelper.Serialize(model));
             return new ObjectResult(model);
         }
     }

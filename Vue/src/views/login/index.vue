@@ -173,7 +173,6 @@ export default {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              this.signalr.start().catch(err => alert(err.message))
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
             })

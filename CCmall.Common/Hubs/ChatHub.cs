@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using CCmall.Common.Redis;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace CCmall.Core.Common.Hubs
 
     public class ChatHub : Hub<IChatHub>
     {
+        private readonly IRedisManager _redisManager;
+
+        public ChatHub(IRedisManager redisManager)
+        {
+            _redisManager = redisManager;
+        }
         /// <summary>
         /// 向指定群组发送信息
         /// </summary>
@@ -79,6 +86,11 @@ namespace CCmall.Core.Common.Hubs
             await Clients.All.ReceiveMessage(user, message);
         }
 
+        public async Task GetLatestData()
+        {
+            var model = _redisManager.GetValue(RedisConstant.DashData);
+            await Clients.All.GetDashData(model);
+        }
         ////定于一个通讯管道，用来管理我们和客户端的连接
         ////1、客户端调用 GetLatestCount，就像订阅
         //public async Task GetLatestCount(string random)

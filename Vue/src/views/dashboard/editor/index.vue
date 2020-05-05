@@ -17,8 +17,8 @@
         </el-col>
         <el-col :span="6">
           <el-input v-model="obj.shoppings" type="number" placeholder="shoppings" />
+          <el-button class="btn" @click="sendData">send</el-button>
         </el-col>
-        <el-button @click="sendData">send</el-button>
       </el-row>
     </div>
   </div>
@@ -45,10 +45,19 @@ export default {
         'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
     }
   },
+  created() {
+    if (this.signalr.state !== 'Connected') {
+      this.signalr.start().catch(err => alert(err.message))
+    }
+    // this.signalr.invoke("GetLatestData");
+  },
   mounted() {
     this.signalr.on('GetDashData', ret => {
-      this.data = ret
+      this.data = JSON.parse(ret)
     })
+  },
+  beforeDestroy() {
+    this.signalr.stop()
   },
   methods: {
     sendData() {
@@ -77,5 +86,9 @@ export default {
   display: block;
   width: 100%;
   margin: 0 auto;
+}
+
+.btn {
+  float: right;
 }
 </style>
