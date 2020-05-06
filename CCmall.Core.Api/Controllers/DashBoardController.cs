@@ -31,7 +31,6 @@ namespace CCmall.Core.Api.Controllers
             var ret = new { data1 = rng.Next(1000, 3000), data2 = rng.Next(3000, 7000), data3 = rng.Next(3000, 5000) };
             return new ObjectResult(ret);
         }
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult SetDashData([FromBody]RequestDashData request)
         {
@@ -45,7 +44,7 @@ namespace CCmall.Core.Api.Controllers
                 //Mapper Function
                 foreach (var prop in model.GetType().GetProperties())
                 {
-                    prop.SetValue(model, prop.GetValue(request));
+                    prop.SetValue(model, (int)prop.GetValue(request) + (int)prop.GetValue(model));
                 }
             }
             _redisManager.Set(RedisConstant.DashData, model, TimeSpan.FromDays(1));

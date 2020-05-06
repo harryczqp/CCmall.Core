@@ -6,6 +6,7 @@ namespace CCmall.Model.Models
 {
     public class RouterData
     {
+        public int id { get; set; }
         public string path { get; set; } = string.Empty;
         public string name { get; set; } = string.Empty;
         public string componment { get; set; } = string.Empty;

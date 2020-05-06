@@ -17,15 +17,20 @@ namespace CCmall.Repository
         {
             var data = Query(f => f.status == (int)CommonEnum.Valid && f.parent == parent).Result.Select(s => new RouterData
             {
-                componment=s.componment,
-                meta=new RouterDataMeta { icon=s.icon,title=s.name},
-                name=s.name,
-                path=s.name,
-                children= GetRouterTree(s.parent)
+                componment = s.componment,
+                meta = new RouterDataMeta { icon = s.icon, title = s.name },
+                name = s.name,
+                path = s.name,
+                id = s.id
             });
             if (!data.Any())
             {
                 return new List<RouterData>();
+            }
+            foreach (var item in data)
+            {
+                var children = GetRouterTree(item.id);
+                data.First(f=>f.id==item.id).children.AddRange(children);
             }
             return data.ToList();
         }
