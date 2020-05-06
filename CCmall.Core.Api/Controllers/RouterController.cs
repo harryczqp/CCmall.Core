@@ -23,10 +23,11 @@ namespace CCmall.Core.Api.Controllers
         {
             _routerRepository = routerRepository;
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult List()
         {
-            var ret = new List<RouterData>();
+            var ret = _routerRepository.GetRouterTree(0);
             return new ObjectResult(ret);
         }
     }

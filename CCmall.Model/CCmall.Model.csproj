@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CCmall.Common\CCmall.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

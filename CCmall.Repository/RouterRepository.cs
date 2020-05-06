@@ -23,6 +23,10 @@ namespace CCmall.Repository
                 path=s.name,
                 children= GetRouterTree(s.parent)
             });
+            if (!data.Any())
+            {
+                return new List<RouterData>();
+            }
             return data.ToList();
         }
     }
