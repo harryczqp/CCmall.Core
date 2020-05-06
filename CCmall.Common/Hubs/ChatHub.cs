@@ -91,6 +91,7 @@ namespace CCmall.Core.Common.Hubs
             var model = _redisManager.GetValue(RedisConstant.DashData);
             await Clients.All.GetDashData(model);
         }
+
         ////定于一个通讯管道，用来管理我们和客户端的连接
         ////1、客户端调用 GetLatestCount，就像订阅
         //public async Task GetLatestCount(string random)

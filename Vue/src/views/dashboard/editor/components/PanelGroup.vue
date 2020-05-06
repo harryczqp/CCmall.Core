@@ -66,7 +66,17 @@ export default {
     CountTo
   },
   props: {
-    obj: {}
+    obj: {
+      type: Object,
+      default: () => {
+        return {
+          visitors: 0,
+          messages: 0,
+          purchases: 0,
+          shoppings: 0
+        }
+      }
+    }
   }
 }
 </script>

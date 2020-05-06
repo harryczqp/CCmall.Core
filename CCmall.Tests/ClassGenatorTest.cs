@@ -12,6 +12,7 @@ namespace CCmall.Tests
     {
         private readonly string _path = @"D:\test";
         private readonly DbHelper _dbHelper;
+        private readonly string[] tables = new string[] { "router" };
         /// <summary>
         /// 测试前请删除D:\test文件夹
         /// </summary>
@@ -25,7 +26,7 @@ namespace CCmall.Tests
         public void DbHelper_CreateRepository()
         {
             var path = Path.Combine(_path, "Repository");
-            _dbHelper.CreateRepository(path, "CCmall", new string[] { });
+            _dbHelper.CreateRepository(path, "CCmall", tables);
             Assert.True(Directory.Exists(Path.Combine(path)));
         }
 
@@ -33,14 +34,14 @@ namespace CCmall.Tests
         public void DbHelper_CreateIRepository()
         {
             var path = Path.Combine(_path, "IRepository");
-            _dbHelper.CreateIRepository(path, "CCmall", new string[] { });
+            _dbHelper.CreateIRepository(path, "CCmall", tables);
             Assert.True(Directory.Exists(Path.Combine(path)));
         }
         [Fact]
         public void DbHelper_CreateEntity()
         {
             var path = Path.Combine(_path, "Entity");
-            _dbHelper.CreateEntity(path, "CCmall", new string[] { });
+            _dbHelper.CreateEntity(path, "CCmall", tables);
             Assert.True(Directory.Exists(Path.Combine(path)));
         }
     }
