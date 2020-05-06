@@ -10,19 +10,24 @@ using CCmall.Core.Common.Hubs;
 using CCmall.Common.Redis;
 using CCmall.Model.Request;
 using Microsoft.AspNetCore.Authorization;
+using CCmall.Repository.Interface;
+using CCmall.Model.Models;
 
 namespace CCmall.Core.Api.Controllers
 {
     public class RouterController : BaseController
     {
+        private readonly IRouterRepository _routerRepository;
 
-        public RouterController()
+        public RouterController(IRouterRepository routerRepository)
         {
+            _routerRepository = routerRepository;
         }
         [HttpGet]
         public IActionResult List()
         {
-            return new ObjectResult(123);
+            var ret = new List<RouterData>();
+            return new ObjectResult(ret);
         }
     }
 }
