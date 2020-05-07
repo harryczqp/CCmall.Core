@@ -31,7 +31,7 @@ namespace CCmall.Core.Api.Extensions
                 c.OrderActionsBy(o => o.RelativePath);
                 try
                 {
-                    var xmlPath = Path.Combine(basePath, "CCmall.Core.xml");
+                    var xmlPath = Path.Combine(basePath, "CCmall.Core.Api.xml");
                     c.IncludeXmlComments(xmlPath, true);
 
                     var xmlModelPath = Path.Combine(basePath, "CCmall.Model.xml");
