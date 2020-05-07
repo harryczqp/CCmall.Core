@@ -26,7 +26,7 @@ namespace CCmall.Repository
                 var children = GetRouterTree(item.id);
                 var model = new RouterData
                 {
-                    component = item.componment.StartsWith("@") ? item.componment : $"@{item.componment}",
+                    component = item.component.StartsWith("@") ? item.component : $"@{item.component}",
                     meta = new RouterDataMeta { icon = item.icon, title = item.name },
                     name = item.name,
                     path = item.name,
