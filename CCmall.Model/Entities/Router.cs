@@ -77,7 +77,7 @@
         /// Nullable:True
         /// </summary>
 
-        public string componment { get; set; }
+        public string component { get; set; }
 
 
         /// <summary>

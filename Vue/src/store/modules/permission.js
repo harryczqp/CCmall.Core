@@ -1,4 +1,5 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+import { getRouter } from '@/api/router'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -49,16 +50,34 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      getRouter().then(ret => {
+        var dynamicRouter = dynamicRouterFilter(ret.data)
+        dynamicRouter = asyncRoutes.concat(dynamicRouter)
+        let accessedRoutes
+        if (roles.includes('admin')) {
+          accessedRoutes = dynamicRouter || []
+        } else {
+          accessedRoutes = filterAsyncRoutes(dynamicRouter, roles)
+        }
+        commit('SET_ROUTES', accessedRoutes)
+        resolve(accessedRoutes)
+      })
     })
   }
+}
+
+// 动态路由递归
+function dynamicRouterFilter(data) {
+  var list = []
+  list = data
+  list.filter(router => {
+    router.component = () => import(router.component)
+    if (router.children && router.children.length) {
+      router.children = dynamicRouterFilter(router.children)
+    }
+    return true
+  })
+  return list
 }
 
 export default {

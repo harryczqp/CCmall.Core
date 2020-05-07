@@ -16,7 +16,7 @@ namespace CCmall.Model.Models
         public int id { get; set; }
         public string path { get; set; } = string.Empty;
         public string name { get; set; } = string.Empty;
-        public string componment { get; set; } = string.Empty;
+        public string component { get; set; } = string.Empty;
         public RouterDataMeta meta { get; set; } = new RouterDataMeta() { icon = string.Empty, title = string.Empty };
         public List<RouterData> children { get; set; }
     }
