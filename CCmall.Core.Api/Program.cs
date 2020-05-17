@@ -28,7 +28,7 @@ namespace CCmall.Core.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) //×¢ÈëAutofacService
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) //×¢ï¿½ï¿½AutofacService
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
@@ -40,11 +40,11 @@ namespace CCmall.Core.Api
                     webBuilder
                         .ConfigureKestrel(options =>
                         {
-                            options.AllowSynchronousIO = true; //ÆôÓÃÍ¬²½IO
+                            options.AllowSynchronousIO = true; //ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½IO
                         })
                         .UseStartup<Startup>()
-                        //.UseUrls($"http://127.0.0.1:{(args.Length >= 1 ? int.Parse(args[1]) : 5123)}");
-                        .UseUrls("http://localhost:5123");
+                        .UseUrls($"http://0.0.0.0:{(args.Length >= 1 ? int.Parse(args[1]) : 5123)}");
+                        //.UseUrls("http://0.0.0.0:5123");
                 });
     }
 }
