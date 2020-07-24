@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Core.Api", "CCmall.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Tests", "CCmall.Tests\CCmall.Tests.csproj", "{7815B0FB-C436-4427-A8CF-706780D5B7B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCmall.ApiGateWay", "CCmall.Api.Gateway\CCmall.ApiGateWay\CCmall.ApiGateWay.csproj", "{DA584A76-2656-4A29-97AB-AC7836844D20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.ApiGateWay", "CCmall.Api.Gateway\CCmall.ApiGateWay.csproj", "{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{7815B0FB-C436-4427-A8CF-706780D5B7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7815B0FB-C436-4427-A8CF-706780D5B7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7815B0FB-C436-4427-A8CF-706780D5B7B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA584A76-2656-4A29-97AB-AC7836844D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA584A76-2656-4A29-97AB-AC7836844D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA584A76-2656-4A29-97AB-AC7836844D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA584A76-2656-4A29-97AB-AC7836844D20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
