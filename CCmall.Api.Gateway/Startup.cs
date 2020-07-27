@@ -30,7 +30,8 @@ namespace CCmall.ApiGateWay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddOcelot(Configuration);
+            services.AddOcelot(Configuration)
+                    .AddConsul();
 
         }
 

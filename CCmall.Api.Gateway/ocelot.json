@@ -1,5 +1,5 @@
 {
-  "ReRoutes": [
+  "Routes": [
     {
       "DownstreamPathTemplate": "/{controller}/{url}",
       "DownstreamScheme": "http",
@@ -9,12 +9,18 @@
           "Port": 5123
         }
       ],
-      "UpstreamPathTemplate": "/{controller}/{url}",
+      "UpstreamPathTemplate": "/api/{controller}/{url}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
     "AdministrationPath": "/administration"
+  },
+  "ServiceDiscoveryProvider": {
+    "Scheme": "http",
+    "Host": "172.8.8.250/",
+    "Port": 32080,
+    "Type": "Consul"
   }
 }
