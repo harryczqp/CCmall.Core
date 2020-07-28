@@ -1,26 +1,50 @@
 {
+  // 转发路由，数组中的每个元素都是某个服务的一组路由转发规则
   "Routes": [
     {
-      "DownstreamPathTemplate": "/{controller}/{url}",
+      "ServiceName": "Core.Api", //对应consul配置的ServiceName
+      // Uri方案，http、https
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5123
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{controller}/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      // 下游（服务提供方）服务路由模板
+      "DownstreamPathTemplate": "/{path}",
+      // 上游（客户端，服务消费方）请求路由模板
+      "UpstreamPathTemplate": "/{path}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin" //轮询     
+      },
+      "UseServiceDiscovery": true,
+      "RateLimitOptions": {
+        "ClientWhitelist": [ "admin" ], // 白名单
+        "EnableRateLimiting": true, // 是否启用限流
+        "Period": "1m", // 统计时间段：1s, 5m, 1h, 1d
+        "PeriodTimespan": 15, // 多少秒之后客户端可以重试
+        "Limit": 2 // 在统计时间段内允许的最大请求数量
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2, // 允许多少个异常请求
+        "DurationOfBreak": 15000, // 熔断的时间，单位为毫秒
+        "TimeoutValue": 5000 // 如果下游请求的处理时间超过多少则视如该请求超时
+      },
+      "FileCacheOptions": { // cache response data - ttl: 10s   10秒内相同url请求直接返回缓存数据
+        "TtlSeconds": 10,
+        "Region": ""
+      }
     }
   ],
+  // 全局配置，此节点的配置会覆盖ReRoutes，可以在这里设置一些通用的配置
   "GlobalConfiguration": {
-    "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
-  },
-  "ServiceDiscoveryProvider": {
-    "Scheme": "http",
-    "Host": "172.8.8.250/",
-    "Port": 32080,
-    "Type": "Consul"
+    "ReRouteIsCaseSensitive": false,
+    "ServiceDiscoveryProvider": {
+      "Host": "172.8.8.250",
+      "Port": 32080,
+      "Type": "Consul" //由Consul提供服务发现
+    },
+    "RateLimitOptions": {
+      "DisableRateLimitHeaders": false, // Http头  X-Rate-Limit 和 Retry-After 是否禁用
+      "QuotaExceededMessage": "Too many requests, are you OK?", // 当请求过载被截断时返回的消息
+      "HttpStatusCode": 999, // 当请求过载被截断时返回的http status
+      "ClientIdHeader": "client_id" // 用来识别客户端的请求头，默认是 ClientId
+    }
   }
 }

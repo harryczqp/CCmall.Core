@@ -14,7 +14,7 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
 using Ocelot.Provider.Polly;
-
+using Ocelot.Cache.CacheManager;
 namespace CCmall.ApiGateWay
 {
     public class Startup
@@ -31,8 +31,11 @@ namespace CCmall.ApiGateWay
         {
             services.AddControllers();
             services.AddOcelot(Configuration)
-                    .AddConsul();
-
+                    .AddCacheManager(x =>
+                    {
+                        x.WithDictionaryHandle();
+                    })
+                    .AddConsul().AddPolly();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

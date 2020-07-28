@@ -17,6 +17,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog;
 using CCmall.Common.Redis;
+using CCmall.Common.Consul;
+using Microsoft.Extensions.Options;
 
 namespace CCmall.Core.Api
 {
@@ -53,6 +55,12 @@ namespace CCmall.Core.Api
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             services.AddSignalR();
+            //consul
+            services.AddHealthChecks();
+            // 读取服务配置文件
+            var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json").Build();
+            services.Configure<ConsulServiceOptions>(config);
+            services.AddConsul();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -81,7 +89,7 @@ namespace CCmall.Core.Api
             }
 
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<ConsulServiceOptions> options)
         {
             if (env.IsDevelopment())
             {
@@ -115,6 +123,8 @@ namespace CCmall.Core.Api
             app.UseAuthorization();
 
             app.UseCors("LimitRequests");
+            app.UseHealthChecks(options.Value.HealthCheck);
+            app.UseConsul();
 
             //TODO 查资料UseEndpoints
             app.UseEndpoints(endpoints =>
