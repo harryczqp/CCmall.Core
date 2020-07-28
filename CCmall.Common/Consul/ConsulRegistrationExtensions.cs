@@ -13,11 +13,11 @@ namespace CCmall.Common.Consul
     // consul服务注册扩展类
     public static class ConsulRegistrationExtensions
     {
-        public static void AddConsul(this IServiceCollection service)
+        public static void AddConsul(this IServiceCollection services)
         {
             // 读取服务配置文件
-            //var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json").Build();
-            //service.Configure<ConsulServiceOptions>(config);
+            var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json").Build();
+            services.Configure<ConsulServiceOptions>(config);
         }
 
         public static IApplicationBuilder UseConsul(this IApplicationBuilder app)

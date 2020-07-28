@@ -8,7 +8,7 @@
       // 下游（服务提供方）服务路由模板
       "DownstreamPathTemplate": "/{path}",
       // 上游（客户端，服务消费方）请求路由模板
-      "UpstreamPathTemplate": "/{path}",
+      "UpstreamPathTemplate": "/api/{path}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "LoadBalancerOptions": {
         "Type": "RoundRobin" //轮询     

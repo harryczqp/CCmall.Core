@@ -57,9 +57,6 @@ namespace CCmall.Core.Api
             services.AddSignalR();
             //consul
             services.AddHealthChecks();
-            // 读取服务配置文件
-            var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json").Build();
-            services.Configure<ConsulServiceOptions>(config);
             services.AddConsul();
         }
 
@@ -125,7 +122,6 @@ namespace CCmall.Core.Api
             app.UseCors("LimitRequests");
             app.UseHealthChecks(options.Value.HealthCheck);
             app.UseConsul();
-
             //TODO 查资料UseEndpoints
             app.UseEndpoints(endpoints =>
             {
