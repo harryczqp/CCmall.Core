@@ -8,7 +8,6 @@ namespace CCmall.Common.Configurations
     {
         public Cors Cors { get; set; }
         public string ApiName { get; set; }
-        public string ApiVersion { get; set; }
     }
     public class Cors
     {

@@ -2,5 +2,5 @@
   "ConsulAddress": "http://172.8.8.250:32080", //consul 服务器地址
   "ServiceName": "Core.Api", //服务名称，ApiGateway中配置的ServiceName对应这里
   "HealthCheck": "/Health", //健康检查地址
-  "ServiceAddress": "http://172.8.8.243:5123" //webapi 地址
+  "ServiceAddress": "http://172.8.8.115:5123" //webapi 地址
 }

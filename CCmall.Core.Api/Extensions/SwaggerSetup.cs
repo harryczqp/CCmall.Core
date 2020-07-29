@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using NLog;
 using CCmall.Common.Configurations;
+using Microsoft.AspNetCore.Builder;
 
 namespace CCmall.Core.Api.Extensions
 {
@@ -19,14 +20,13 @@ namespace CCmall.Core.Api.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             var basePath = AppContext.BaseDirectory;
             var ApiName = Appsettings.Startup.ApiName;
-            var Version = Appsettings.Startup.ApiVersion;
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc(Version, new OpenApiInfo
+                c.SwaggerDoc(ApiName, new OpenApiInfo
                 {
-                    Version = Version,
+                    Version = "v1",
                     Title = $"{ApiName} 接口文档",
-                    Description = $"{ApiName} HTTP API " + Version,
+                    Description = $"{ApiName} HTTP API ",
                 });
                 c.OrderActionsBy(o => o.RelativePath);
                 try
@@ -54,6 +54,20 @@ namespace CCmall.Core.Api.Extensions
                     Type = SecuritySchemeType.ApiKey
                 });
             });
+        }
+
+        public static void UseSwaggerSetup(this IApplicationBuilder applicationBuilder)
+        {
+            var ApiName = Appsettings.Startup.ApiName;
+            applicationBuilder.UseSwagger(config =>
+                               {
+                                  config.RouteTemplate = "{documentName}/swagger.json";
+                               })
+                              .UseSwaggerUI(options =>
+                              {
+                                  options.SwaggerEndpoint($"/{ApiName}/swagger.json", $"{ApiName}");
+                                  options.RoutePrefix = "";
+                              });
         }
     }
 }

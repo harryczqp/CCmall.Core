@@ -96,16 +96,7 @@ namespace CCmall.Core.Api
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(options =>
-            {
-                var ApiName = Appsettings.Startup.ApiName;
-                var Version = Appsettings.Startup.ApiVersion;
-                options.SwaggerEndpoint($"/swagger/{Version}/swagger.json", $"{Version}");
-                options.RoutePrefix = "";
-            });
+            
             // 使用静态文件
             app.UseStaticFiles();
             // 使用cookie
@@ -118,6 +109,8 @@ namespace CCmall.Core.Api
             app.UseAuthentication();
             // 授权中间件
             app.UseAuthorization();
+            //swagger
+            app.UseSwaggerSetup();
 
             app.UseCors("LimitRequests");
             app.UseHealthChecks(options.Value.HealthCheck);

@@ -15,6 +15,7 @@ using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
 using Ocelot.Provider.Polly;
 using Ocelot.Cache.CacheManager;
+using CCmall.ApiGateWay.SwaggerExtension;
 namespace CCmall.ApiGateWay
 {
     public class Startup
@@ -36,6 +37,8 @@ namespace CCmall.ApiGateWay
                         x.WithDictionaryHandle();
                     })
                     .AddConsul().AddPolly();
+
+            services.AddSwaggerExtension();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +52,8 @@ namespace CCmall.ApiGateWay
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwaggerExtension();
 
             app.UseAuthorization();
 
