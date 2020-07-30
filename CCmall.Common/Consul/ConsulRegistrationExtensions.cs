@@ -16,7 +16,7 @@ namespace CCmall.Common.Consul
         public static void AddConsul(this IServiceCollection services)
         {
             // 读取服务配置文件
-            var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json").Build();
+            var config = new ConfigurationBuilder().AddJsonFile("consulconfig.json", optional: false, reloadOnChange: true).Build();
             services.Configure<ConsulServiceOptions>(config);
         }
 
