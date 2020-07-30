@@ -16,7 +16,11 @@ jobs:
       run: |
         sudo docker login --username=${{ secrets.Aliyun_Username }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.Aliyun_Password }}
         tag=${GITHUB_REF:11}
-        echo "Build Tag '$tag'"
+        echo "Build Tag Api'$tag'"
         sudo docker build ./ --file Dockerfile --tag ccmall.core:$tag
         sudo docker tag ccmall.core:$tag registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.core:latest
         sudo docker push registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.core:latest
+        echo "Build Tag Gateway'$tag'"
+        sudo docker build ./ --file GateWayDockerfile --tag ccmall.gateway:$tag
+        sudo docker tag ccmall.gateway:$tag registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.gateway:latest
+        sudo docker push registry.cn-hangzhou.aliyuncs.com/harryczqp/ccmall.gateway:latest
