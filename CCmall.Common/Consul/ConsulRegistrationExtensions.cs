@@ -1,5 +1,6 @@
 ﻿using Consul;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,9 @@ namespace CCmall.Common.Consul
 
             // 获取服务配置项
             var serviceOptions = app.ApplicationServices.GetRequiredService<IOptions<ConsulServiceOptions>>().Value;
+
+            // var webBuilder = app.ApplicationServices.GetRequiredService<IWebHostBuilder>();
+            //var uri = new Uri(webBuilder.GetSetting("urls"));
 
             // 服务ID必须保证唯一
             serviceOptions.ServiceId = Guid.NewGuid().ToString();
