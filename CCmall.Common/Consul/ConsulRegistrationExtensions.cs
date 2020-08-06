@@ -1,4 +1,5 @@
-﻿using Consul;
+﻿using CCmall.Common.Configurations;
+using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace CCmall.Common.Consul
@@ -29,9 +32,6 @@ namespace CCmall.Common.Consul
             // 获取服务配置项
             var serviceOptions = app.ApplicationServices.GetRequiredService<IOptions<ConsulServiceOptions>>().Value;
 
-            // var webBuilder = app.ApplicationServices.GetRequiredService<IWebHostBuilder>();
-            //var uri = new Uri(webBuilder.GetSetting("urls"));
-
             // 服务ID必须保证唯一
             serviceOptions.ServiceId = Guid.NewGuid().ToString();
 
@@ -43,6 +43,7 @@ namespace CCmall.Common.Consul
 
             // 获取当前服务地址和端口，配置方式
             var uri = new Uri(serviceOptions.ServiceAddress);
+            //var uri = !string.IsNullOrEmpty(serviceOptions.ServiceAddress) ? new Uri(serviceOptions.ServiceAddress) : new Uri($"{Dns.GetHostEntry(Dns.GetHostName()).AddressList.Where(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).LastOrDefault()}:{Appsettings.Urls.Port}");
 
             // 节点服务注册对象
             var registration = new AgentServiceRegistration()

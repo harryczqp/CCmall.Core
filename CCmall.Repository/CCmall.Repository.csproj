@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="3.0.4" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="3.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CCmall.Common\CCmall.Common.csproj" />
     <ProjectReference Include="..\CCmall.Model\CCmall.Model.csproj" />
   </ItemGroup>
