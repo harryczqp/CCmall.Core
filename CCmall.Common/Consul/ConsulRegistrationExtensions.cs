@@ -24,7 +24,7 @@ namespace CCmall.Common.Consul
             services.Configure<ConsulServiceOptions>(config);
         }
 
-        public static IApplicationBuilder UseConsul(this IApplicationBuilder app)
+        public static IApplicationBuilder UseConsul(this IApplicationBuilder app,string serviceAddress)
         {
             // 获取主机生命周期管理接口
             var lifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
@@ -42,7 +42,7 @@ namespace CCmall.Common.Consul
             });
 
             // 获取当前服务地址和端口，配置方式
-            var uri = new Uri(serviceOptions.ServiceAddress);
+            var uri = new Uri(string.IsNullOrEmpty(serviceAddress) ? serviceOptions.ServiceAddress : serviceAddress);
             //var uri = !string.IsNullOrEmpty(serviceOptions.ServiceAddress) ? new Uri(serviceOptions.ServiceAddress) : new Uri($"{Dns.GetHostEntry(Dns.GetHostName()).AddressList.Where(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).LastOrDefault()}:{Appsettings.Urls.Port}");
 
             // 节点服务注册对象

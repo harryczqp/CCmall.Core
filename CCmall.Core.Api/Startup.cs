@@ -19,6 +19,8 @@ using NLog;
 using CCmall.Common.Redis;
 using CCmall.Common.Consul;
 using Microsoft.Extensions.Options;
+using System.Net;
+using System.Linq;
 
 namespace CCmall.Core.Api
 {
@@ -27,6 +29,7 @@ namespace CCmall.Core.Api
         private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Env { get; }
+        private string _serviceAddress=string.Empty;
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
@@ -35,6 +38,12 @@ namespace CCmall.Core.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var ip = Dns.GetHostAddresses(Dns.GetHostName()).LastOrDefault();
+            if (ip != null)
+            {
+                var port = Configuration.GetSection("URLS").Get<Uri>().Port;
+                _serviceAddress = $"http://{ip}:{port}";
+            }
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             services.AddSingleton<IRedisManager, RedisManager>();
             services.AddSwaggerSetup();
@@ -57,6 +66,7 @@ namespace CCmall.Core.Api
             services.AddSignalR();
             //consul
             services.AddHealthChecks();
+            
             services.AddConsul();
         }
 
@@ -114,7 +124,8 @@ namespace CCmall.Core.Api
 
             app.UseCors("LimitRequests");
             app.UseHealthChecks(options.Value.HealthCheck);
-            app.UseConsul();
+
+            app.UseConsul(_serviceAddress);
             //TODO 查资料UseEndpoints
             app.UseEndpoints(endpoints =>
             {
