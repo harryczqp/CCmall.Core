@@ -15,7 +15,7 @@ using CCmall.Model.Models;
 
 namespace CCmall.Core.Api.Controllers
 {
-    public class HealtController
+    public class HealthController
     {
         [HttpGet]
         [Route("/Health")]

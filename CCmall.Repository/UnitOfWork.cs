@@ -3,16 +3,19 @@ using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DotNetCore.CAP;
 
 namespace CCmall.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ISqlSugarClient _sqlSugarClient;
+        private readonly ICapPublisher _capPublisher;
 
-        public UnitOfWork(ISqlSugarClient sqlSugarClient)
+        public UnitOfWork(ISqlSugarClient sqlSugarClient,ICapPublisher capPublisher)
         {
             _sqlSugarClient = sqlSugarClient;
+            _capPublisher = capPublisher;
         }
 
         /// <summary>
@@ -46,6 +49,11 @@ namespace CCmall.Repository
         public void RollbackTran()
         {
             GetDbClient().RollbackTran();
+        }
+
+        public void Cap()
+        {
+            //GetDbClient().Ado.BeginTran
         }
     }
 }

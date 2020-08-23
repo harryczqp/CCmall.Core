@@ -10,6 +10,7 @@ using CCmall.Core.Common.Hubs;
 using CCmall.Common.Redis;
 using CCmall.Model.Request;
 using Microsoft.AspNetCore.Authorization;
+using DotNetCore.CAP;
 
 namespace CCmall.Core.Api.Controllers
 {
@@ -17,11 +18,13 @@ namespace CCmall.Core.Api.Controllers
     {
         private readonly IHubContext<ChatHub> _hubContext;
         private readonly IRedisManager _redisManager;
+        private readonly ICapPublisher _capPublisher;
 
-        public DashBoardController(IHubContext<ChatHub> hubContext, IRedisManager redisManager)
+        public DashBoardController(IHubContext<ChatHub> hubContext, IRedisManager redisManager,ICapPublisher capPublisher)
         {
             _hubContext = hubContext;
             _redisManager = redisManager;
+            _capPublisher = capPublisher;
         }
 
         [HttpGet]
@@ -50,6 +53,11 @@ namespace CCmall.Core.Api.Controllers
             _redisManager.Set(RedisConstant.DashData, model, TimeSpan.FromDays(1));
             _hubContext.Clients.All.SendAsync("GetDashData", SerializeHelper.Serialize(model));
             return new ObjectResult(model);
+        }
+        [HttpGet]
+        public IActionResult CapTest()
+        {
+            return new ObjectResult(null);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CCmall.Core.Api
         private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Env { get; }
-        private string _serviceAddress=string.Empty;
+        private string _serviceAddress = string.Empty;
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
@@ -50,6 +50,14 @@ namespace CCmall.Core.Api
             services.AddAuthorizationSetup();
             services.AddSqlsugarSetup();
             services.AddCorsSetup();
+            services.AddCap(config =>
+            {
+                config.UseMySql(Appsettings.BaseDB.First().Connection);
+                config.UseRabbitMQ(mqConfig =>
+                {
+                    Configuration.GetSection("RabbitMQ").Bind(mqConfig);
+                });
+            });
             services.AddControllers(o =>
             {
                 o.Filters.Add<ResultFilter>();
@@ -66,7 +74,7 @@ namespace CCmall.Core.Api
             services.AddSignalR();
             //consul
             services.AddHealthChecks();
-            
+
             services.AddConsul();
         }
 
@@ -106,7 +114,7 @@ namespace CCmall.Core.Api
             {
                 app.UseExceptionHandler("/Error");
             }
-            
+
             // 使用静态文件
             app.UseStaticFiles();
             // 使用cookie
