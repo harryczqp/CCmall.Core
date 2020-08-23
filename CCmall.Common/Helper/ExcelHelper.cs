@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -68,6 +70,63 @@ namespace CCmall.Common.Helper
             {
                 this.fields.Add(new Object[] { field, attr });
             }
+        }
+    }
+
+
+    public class CommonExcelHelper
+    {
+        public List<string> ReadLastLine(string file)
+        {
+            var ret = new List<string>();
+            using (var fs = File.OpenRead(file))
+            {
+                IWorkbook workbook;
+                if (file.IndexOf(".xlsx") > 0)
+                    workbook = new XSSFWorkbook(fs);
+                // 2003版本
+                else
+                    workbook = new HSSFWorkbook(fs);
+
+                if (workbook == null)
+                {
+                    throw new Exception("workbook is null");
+                }
+                var sheet = workbook.GetSheetAt(0);
+                if (sheet == null)
+                {
+                    throw new Exception("sheet is null");
+                }
+                int rowCount = sheet.LastRowNum;//总行数
+                if (rowCount == 0)
+                {
+                    throw new Exception("rowCount is 0");
+                }
+                var lastdata = sheet.GetRow(rowCount);
+                var cellCount = lastdata.LastCellNum;
+                for (int i = 0; i < cellCount - 1; i++)
+                {
+                    var value = string.Empty;
+                    switch (lastdata.GetCell(i).CellType)
+                    {
+                        case CellType.Unknown:
+                            break;
+                        case CellType.Numeric:
+                            value = lastdata.GetCell(i).NumericCellValue.ToString();
+                            break;
+                        case CellType.String:
+                            value = lastdata.GetCell(i).StringCellValue;
+                            break;
+                        case CellType.Boolean:
+                            value = lastdata.GetCell(i).BooleanCellValue?"true":"false";
+                            break;
+                        default:
+                            break;
+                    }
+                    ret.Add(value);
+                }
+            }
+            return ret;
         }
     }
 }

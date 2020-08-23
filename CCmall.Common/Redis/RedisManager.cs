@@ -173,5 +173,29 @@ namespace CCmall.Common.Redis
             }
             return _redisConnection.GetDatabase().HashSet(key, field, value);
         }
+
+        /// <summary>
+        /// 获取信息
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public TEntity GetHash<TEntity>(string key, string field, bool isReconnected = false)
+        {
+            if (isReconnected)
+            {
+                _redisConnection = GetRedisConnection();
+            }
+            var value= _redisConnection.GetDatabase().HashGet(key, field);
+            if (value.HasValue)
+            {
+                //需要用的反序列化，将Redis存储的Byte[]，进行反序列化
+                return SerializeHelper.DeserializeBytes<TEntity>(value);
+            }
+            else
+            {
+                return default(TEntity);
+            }
+        }
     }
 }

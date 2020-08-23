@@ -8,5 +8,6 @@ namespace CCmall.Common.Redis
     {
         public const string UserData = "UserData";
         public const string DashData = "DashData";
+        public const string MachineInfo = "MachineInfo";
     }
 }

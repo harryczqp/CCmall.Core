@@ -58,14 +58,15 @@ namespace CCmall.Core.Api.Extensions
 
         public static void UseSwaggerSetup(this IApplicationBuilder applicationBuilder)
         {
-            var ApiName = Appsettings.Startup.ApiName;
+            //var ApiName = Appsettings.Startup.ApiName;
+            var ApiName = "CCmall.Core";
             applicationBuilder.UseSwagger(config =>
                                {
-                                  config.RouteTemplate = "{documentName}/swagger.json";
+                                  config.RouteTemplate = "/api/{documentName}/swagger.json";
                                })
                               .UseSwaggerUI(options =>
                               {
-                                  options.SwaggerEndpoint($"/{ApiName}/swagger.json", $"{ApiName}");
+                                  options.SwaggerEndpoint($"/api/{ApiName}/swagger.json", $"{ApiName}");
                                   options.RoutePrefix = "";
                               });
         }

@@ -9,6 +9,7 @@ namespace CCmall.Common.Redis
         void Clear();
         bool Get(string key);
         TEntity Get<TEntity>(string key);
+        TEntity GetHash<TEntity>(string key, string field, bool isReconnected = false);
         string GetValue(string key);
         void Remove(string key);
         void Set(string key, object value, TimeSpan cacheTime);
