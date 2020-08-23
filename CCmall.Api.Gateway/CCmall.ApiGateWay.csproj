@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Content Update="ocelot.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
