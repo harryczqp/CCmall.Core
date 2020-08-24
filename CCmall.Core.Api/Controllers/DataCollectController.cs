@@ -40,6 +40,7 @@ namespace CCmall.Core.Api.Controllers
                 return new ObjectResult(0);
             }
             var path = Path.Combine(machineInfo.FileLocation, $"{DateTime.Now.ToString("yyyyMMdd")}.{machineInfo.FileType}");
+            path = @"\" + path.Replace(@"\\", @"\");
             if (!System.IO.File.Exists(path))
             {
                 return new ObjectResult($"{path} file not found");
