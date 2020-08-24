@@ -6,7 +6,7 @@
       // Uri方案，http、https
       "DownstreamScheme": "http",
       // 下游（服务提供方）服务路由模板
-      "DownstreamPathTemplate": "/{url}",
+      "DownstreamPathTemplate": "/api/{url}",
       // 上游（客户端，服务消费方）请求路由模板
       "UpstreamPathTemplate": "/api/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put", "Patch" ],
@@ -30,19 +30,6 @@
         "TtlSeconds": 10,
         "Region": ""
       }
-    },
-    {
-      "ServiceName": "Core.Swagger",
-      "DownstreamScheme": "http",
-      "LoadBalancerOptions": {
-        "Type": "RoundRobin" //轮询     
-      },
-      // 下游（服务提供方）服务路由模板
-      "DownstreamPathTemplate": "/CCmall.Core/swagger.json",
-      // 上游（客户端，服务消费方）请求路由模板
-      "UpstreamPathTemplate": "/api/CCmall.Core/swagger.json",
-      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put", "Patch" ],
-      "UseServiceDiscovery": true
     }
   ],
   // 全局配置，此节点的配置会覆盖ReRoutes，可以在这里设置一些通用的配置
