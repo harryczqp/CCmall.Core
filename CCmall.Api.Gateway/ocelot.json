@@ -36,7 +36,7 @@
   "GlobalConfiguration": {
     "ReRouteIsCaseSensitive": false,
     "ServiceDiscoveryProvider": {
-      "Host": "172.8.8.250",
+      "Host": "192.168.112.250",
       "Port": 32080,
       "Type": "Consul" //由Consul提供服务发现
     },

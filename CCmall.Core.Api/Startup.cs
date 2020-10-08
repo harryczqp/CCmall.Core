@@ -38,7 +38,7 @@ namespace CCmall.Core.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var ip = Dns.GetHostAddresses(Dns.GetHostName()).LastOrDefault();
+            var ip = Dns.GetHostAddresses(Dns.GetHostName()).LastOrDefault(f=>f.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork);
             if (ip != null)
             {
                 var port = Configuration.GetSection("URLS").Get<Uri>().Port;
