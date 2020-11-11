@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.Tests", "CCmall.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCmall.ApiGateWay", "CCmall.Api.Gateway\CCmall.ApiGateWay.csproj", "{80D7EE5D-97F4-449E-8CAF-4674DBFE092D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{055D067C-A930-433E-963B-C27133E31D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{055D067C-A930-433E-963B-C27133E31D04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCmall.AutoService", "CCmall.AutoService\CCmall.AutoService.csproj", "{4777A2DD-F05C-4751-8D3D-05361662B41D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{055D067C-A930-433E-963B-C27133E31D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{055D067C-A930-433E-963B-C27133E31D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{055D067C-A930-433E-963B-C27133E31D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4777A2DD-F05C-4751-8D3D-05361662B41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4777A2DD-F05C-4751-8D3D-05361662B41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4777A2DD-F05C-4751-8D3D-05361662B41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4777A2DD-F05C-4751-8D3D-05361662B41D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
