@@ -12,7 +12,7 @@ namespace CCmall.AutoService
             {
                 x.Service<MainService>(s =>                                  
                 {
-                    s.ConstructUsing(name => new MainService());
+                    s.ConstructUsing(name => new MainService(args));
                 });
                 x.RunAsLocalSystem();
 

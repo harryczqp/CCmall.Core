@@ -6,6 +6,11 @@ namespace CCmall.AutoService
 {
     public class MainService
     {
+        private string[] args;
+        public MainService(string[] vs)
+        {
+            args = vs;
+        }
         public void start()
         {
 
